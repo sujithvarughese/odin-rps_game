@@ -5,12 +5,10 @@ function getComputersChoice() {
     const playOptions = ['rock', 'paper', 'scissors'];
     return playOptions[Math.floor(Math.random() * 3)];
 }
-const compChoice = () =>
-// get players play
 
 function getPlayersChoice() {
     let playerSelection = '';
-    let moveValidated = false;
+    /*let moveValidated = false;
     do {
         playerSelection = prompt('Choose rock, paper, or scissors:');
         playerSelection.toLowerCase();
@@ -24,37 +22,65 @@ function getPlayersChoice() {
             console.log('Want to quit? Type "Y" to quit, or please enter a valid move to play!')
         }
     } while (!moveValidated);
+    */
+    playerSelection = 'rock';
     return playerSelection;
 }
 
 function playRound(playerSelection, computerSelection) {
-    let playerWin = false;
+    let scoreUpdate = -1;
     if (playerSelection === computerSelection) {
         return `Both players chose ${playerSelection}! Tie game!`;
     }
     else {
         if (playerSelection === 'rock') {
             if (computerSelection === 'scissors') {
-                playerWin = true;
+                scoreUpdate = 1;
             }
         }
         else if (playerSelection === 'paper') {
             if (computerSelection === 'rock') {
-                playerWin = true;
+                scoreUpdate = 1;
             }
         }
         else if (playerSelection === 'scissors') {
             if (computerSelection === 'paper') {
-                playerWin = true;
+                scoreUpdate = 1;
             }
         }
     }
-    return playerWin ? `${playerSelection} beats ${computerSelection}! You Win!` :
+    score.updateScore(scoreUpdate);
+
+    return scoreUpdate > 0 ? `${playerSelection} beats ${computerSelection}! You Win!` :
         `${computerSelection} beats ${playerSelection}. Sorry, you lose.`;
 }
 
-function game() {
-    this.playerScore = 0;
-    this.computerScore = 0;
+// score object to keep track of score with built-in function to update or return score
+const score = {
+    player: 0,
+    computer: 0,
+    updateScore: function(result) {
+        if (result === 1) {
+            this.player += 1;
+        } else if (result === -1) {
+            this.computer += 1;
+        }
+    },
+    getScore: function () {
+        return [this.player, this.computer];
+    }
 }
-console.log(getComputersChoice())
+
+function game() {
+    //set up new round
+    const playersChoice = getPlayersChoice();
+    const computerChoice = getComputersChoice();
+    console.log(playersChoice, computerChoice)
+    console.log(playRound(playersChoice, computerChoice));
+    console.log(score.getScore());
+    //get results of each round and update score
+
+    // when player or computer gets 5 wins, end the game and display winner to the user
+}
+
+game();
