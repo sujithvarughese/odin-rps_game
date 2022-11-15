@@ -49,12 +49,33 @@ function playRound(playerSelection, computerSelection) {
             }
         }
     }
+
+    // send scoreUpdate to score object's function to keep track of score
     score.updateScore(scoreUpdate);
 
     return scoreUpdate > 0 ? `${playerSelection} beats ${computerSelection}! You Win!` :
         `${computerSelection} beats ${playerSelection}. Sorry, you lose.`;
 }
+function game() {
+    //set up new round
+    let gameOver = false;
 
+
+    console.log(playRound(getPlayersChoice(), getComputersChoice()));
+    console.log(score.getScore());
+
+    let pointsToWin = 9999;
+
+    // when player or computer gets 5 wins, end the game and display winner to the user
+    if (score.player >= pointsToWin) {
+        console.log("Congratulations! You Win!");
+        gameOver = true;
+    }
+    else if (score.computer >= pointsToWin) {
+        console.log("You Lose. Practice and come back.");
+        gameOver = true;
+    }
+}
 // score object to keep track of score with built-in function to update or return score
 const score = {
     player: 0,
@@ -66,21 +87,10 @@ const score = {
             this.computer += 1;
         }
     },
-    getScore: function () {
+    getScore: function (pointsToWin = 1000) {
+
         return [this.player, this.computer];
     }
-}
-
-function game() {
-    //set up new round
-    const playersChoice = getPlayersChoice();
-    const computerChoice = getComputersChoice();
-    console.log(playersChoice, computerChoice)
-    console.log(playRound(playersChoice, computerChoice));
-    console.log(score.getScore());
-    //get results of each round and update score
-
-    // when player or computer gets 5 wins, end the game and display winner to the user
 }
 
 game();
