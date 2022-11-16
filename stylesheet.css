@@ -8,7 +8,6 @@ h1 {
     margin-bottom: 10px;
 }
 h2 {
-    font-size: 50px;
     margin-top: 0;
     margin-bottom: 20px;
 }
@@ -21,10 +20,15 @@ button {
     border-radius: 20px;
 }
 
+button:hover {
+    background-color: gold;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
 #rock-btn {
     color: darkred;
 }
-
 #paper-btn {
     color: blue;
 }
