@@ -28,6 +28,20 @@ function getPlayersChoice() {
 }
 
 function playRound(playerSelection, computerSelection) {
+    const rock = document.getElementById('rock-btn');
+    rock.addEventListener('click', () => {
+        alert('Rock!');
+    });
+    const paper = document.getElementById('paper-btn');
+    paper.addEventListener('click', () => {
+        alert('Paper!');
+    });
+    const scissors = document.getElementById('scissors-btn');
+    scissors.addEventListener('click', () => {
+        alert('Scissors!');
+    });
+
+
     let scoreUpdate = -1;
     if (playerSelection === computerSelection) {
         return `Both players chose ${playerSelection}! Tie game!`;
@@ -92,5 +106,11 @@ const score = {
         return [this.player, this.computer];
     }
 }
+
+const start = document.getElementById('start-btn');
+start.addEventListener('click', () => {
+    alert('Starting Game...');
+});
+
 
 game();
